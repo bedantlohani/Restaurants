@@ -3,7 +3,6 @@ import requests
 import openai
 import random
 
-openai.api_key = "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"
 
 
 def fetch_menu_content(url):
