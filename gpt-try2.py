@@ -4,7 +4,6 @@ import openai
 import random
 
 
-
 def fetch_menu_content(url):
     try:
         response = requests.get(url, timeout=10)
@@ -21,7 +20,8 @@ def process_content_with_openai(content):
             model="gpt-4-0125-preview",
             messages=[
                 {"role": "system",
-                 "content": "You are a sophisticated menu analysis tool. Extract structured menu information including categories, subcategories, items, descriptions, prices, and images."},
+                 "content": "You are a sophisticated menu analysis tool. Extract structured menu information including "
+                            "categories, subcategories, items, descriptions, prices, and images. "},
                 {"role": "user", "content": content}
             ]
         )
@@ -36,12 +36,12 @@ def read_csv_and_process_menus(csv_path, output_csv_path):
         csv_reader = list(csv.DictReader(csv_file))
         random.shuffle(csv_reader)
 
-    processed_count = 0
+    # processed_count = 0
     menus_info = []
 
     for row in csv_reader:
-        if processed_count >= 10:
-            break
+        # if processed_count >= 10:
+        #     break
 
         menu_url = row.get('Menu URL')
         if not menu_url or not menu_url.startswith(('http://', 'https://')):
@@ -56,7 +56,7 @@ def read_csv_and_process_menus(csv_path, output_csv_path):
                     **row,
                     'Menu Data': processed_content
                 })
-                processed_count += 1
+                # processed_count += 1
         else:
             print(f"Failed to fetch or process menu content from {menu_url}")
 
